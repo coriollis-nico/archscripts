@@ -15,10 +15,10 @@ ping -c 5 archlinux.org &&
 # 1.8: Update the system clock
 timedatectl &&
 read -p '[Press any key to continue]'
-# 1.9: Update the system clock
+# 1.9: Disk selection
 lsblk &&
 echo "Where to install? (e.g. /dev/sda)" &&
-read -p DISK &&
+read DISK &&
 read -p "THIS WILL WIPE THE DISK $DISK [Press any key to continue]" &&
 ## Disk wiping
 wipefs --all ${DISK} &&

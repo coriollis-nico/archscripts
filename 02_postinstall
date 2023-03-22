@@ -19,7 +19,7 @@ echo LANG=es_MX.UTF-8 > /etc/locale.conf
 KEYMAP=la-latin1
 # 3.5: Network
 echo "Enter hostname: "
-read -p HOSTNAME_INPUT
+read HOSTNAME_INPUT
 echo $HOSTNAME_INPUT > /etc/hostname
 # 3.7: Root password
 echo "Root password:"
