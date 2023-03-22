@@ -1,0 +1,27 @@
+#!/bin/bash
+echo 'NCH Arch Installer'
+echo 'THIS WILL WIPE AN ENTIRE PHYSICAL DISK'
+echo 'Make sure system is connected to the internet and keyboard layout is set'
+read -p '[Press any key to continue]'
+# 1.6: Verify boot mode
+echo 'ls /sys/firmware/efi/efivars' &&
+# 1.7: Verify connection
+ping -c 10 archlinux.org &&
+# 1.8: Update the system clock
+timedatectl &&
+read -p '[Press any key to continue]'
+# 1.9: Update the system clock
+lsblk &&
+read -p "Where to install? (e.g. /dev/sda)" DISK &&
+read -p "THIS WILL WIPE THE DISK $DISK [Press any key to continue]" &&
+## Disk wiping
+wipefs --all ${DISK} &&
+## Disk partitioning
+echo "label: dos
+device: ${DISK}
+unit: sectors
+
+${DISK}1 : size=2048MiB, type=UEFI
+${DISK}2 : size=2GiB, type=SWAP
+${DISK}3 : type=23
+" | sfdisk ${DISK} &&
