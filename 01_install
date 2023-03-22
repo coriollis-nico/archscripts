@@ -2,7 +2,11 @@
 echo 'NCH Arch Installer'
 echo 'THIS WILL WIPE AN ENTIRE PHYSICAL DISK'
 echo 'Make sure system is connected to the internet and keyboard layout is set'
+echo 'and execute INSIDE the archscripts folder'
 read -p '[Press any key to continue]'
+
+SCRIPTS_LOCATION=$(pwd)
+
 # --- Preinstall --- #
 # 1.6: Verify boot mode
 echo 'ls /sys/firmware/efi/efivars' &&
@@ -27,13 +31,22 @@ ${DISK}2 : size=2GiB, type=SWAP
 ${DISK}3 : type=23
 " | sfdisk ${DISK} &&
 # 1.10 Formatting
-mkfs.fat -F 32 ${DISK}1 &&
-mkswap ${DISK}2 &&
-mkfs.ext4 ${DISK}3 &&
+mkfs.fat -F 32 -n BOOTP ${DISK}1 &&
+mkswap -L SWAPP ${DISK}2 &&
+mkfs.ext4 -L ROOTP ${DISK}3 &&
 # 1.11 Mounting
 mount ${DISK}3 /mnt &&
 mount --mkdir ${DISK}1 /mnt/boot &&
 swapon ${DISK}2
 # --- Install --- #
 # 2.1 Essential packages
-cat packages_01 | pacstrap -K /mnt -
+cat packages_01 | pacstrap -K /mnt - &&
+# --- Config --- #
+# 3.1 Fstab
+genfstab -U /mnt >> /mnt/etc/fstab
+cat /mnt/etc/fstab
+
+# Copy files to new system
+cp * /mnt/root
+echo 'Scripts copied to new stystem'
+echo 'Please chroot into new system and execute next script (arch-chroot /mnt)'
