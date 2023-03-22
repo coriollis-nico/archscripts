@@ -28,9 +28,9 @@ echo "label: gpt
 device: ${DISK}
 unit: sectors
 
-${DISK}1 : size=2048MiB, type=UEFI
-${DISK}2 : size=2GiB, type=SWAP
-${DISK}3 : type=23
+1 : size=2048MiB, type=UEFI
+2 : size=2GiB, type=SWAP
+3 : type=23
 " | sfdisk ${DISK} >> log &&
 read -p '[Press any key to continue]'
 # 1.10 Formatting
