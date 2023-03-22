@@ -1,0 +1,13 @@
+base
+base-devel
+linux-zen
+linux-firmware
+exfatprogs
+e2fsprogs
+nilfs-utils
+ntfs-3g
+networkmanager
+vim
+man-db
+man-pages
+texinfo

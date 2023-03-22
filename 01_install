@@ -3,10 +3,11 @@ echo 'NCH Arch Installer'
 echo 'THIS WILL WIPE AN ENTIRE PHYSICAL DISK'
 echo 'Make sure system is connected to the internet and keyboard layout is set'
 read -p '[Press any key to continue]'
+# --- Preinstall --- #
 # 1.6: Verify boot mode
 echo 'ls /sys/firmware/efi/efivars' &&
 # 1.7: Verify connection
-ping -c 10 archlinux.org &&
+ping -c 5 archlinux.org &&
 # 1.8: Update the system clock
 timedatectl &&
 read -p '[Press any key to continue]'
@@ -29,7 +30,10 @@ ${DISK}3 : type=23
 mkfs.fat -F 32 ${DISK}1 &&
 mkswap ${DISK}2 &&
 mkfs.ext4 ${DISK}3 &&
-# 1.10 Mounting
+# 1.11 Mounting
 mount ${DISK}3 /mnt &&
 mount --mkdir ${DISK}1 /mnt/boot &&
-swapon ${DISK}2 &&
+swapon ${DISK}2
+# --- Install --- #
+# 2.1 Essential packages
+cat packages_01 | pacstrap -K /mnt -
