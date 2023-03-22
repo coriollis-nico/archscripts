@@ -22,9 +22,10 @@ wipefs --all ${DISK} &&
 ## Disk partitioning
 parted --script $DISK \
 	mklabel gpt \
-	mkpart primary fat32 "BOOTP" 1MiB 2048MiB \
-	mkpart primary linux-swap "SWAPP" 2048MiB 4048MiB \
-	mkpart primary ext4 "ROOTP" 4048MiB 100%
+	mkpart primary 1MiB 2048MiB \
+	set 1 esp on \
+	mkpart primary 2048MiB 4048MiB \
+	mkpart primary 4048MiB 100%
 lsblk -f
 read -p '[Press any key to continue]'
 # 1.11 Mounting
