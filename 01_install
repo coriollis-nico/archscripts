@@ -25,3 +25,11 @@ ${DISK}1 : size=2048MiB, type=UEFI
 ${DISK}2 : size=2GiB, type=SWAP
 ${DISK}3 : type=23
 " | sfdisk ${DISK} &&
+# 1.10 Formatting
+mkfs.fat -F 32 ${DISK}1 &&
+mkswap ${DISK}2 &&
+mkfs.ext4 ${DISK}3 &&
+# 1.10 Mounting
+mount ${DISK}3 /mnt &&
+mount --mkdir ${DISK}1 /mnt/boot &&
+swapon ${DISK}2 &&
