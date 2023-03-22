@@ -9,7 +9,7 @@ SCRIPTS_LOCATION=$(pwd)
 
 # --- Preinstall --- #
 # 1.6: Verify boot mode
-echo 'ls /sys/firmware/efi/efivars' &&
+ls /sys/firmware/efi/efivars &&
 # 1.7: Verify connection
 ping -c 5 archlinux.org &&
 # 1.8: Update the system clock
@@ -17,12 +17,13 @@ timedatectl &&
 read -p '[Press any key to continue]'
 # 1.9: Update the system clock
 lsblk &&
-read -p "Where to install? (e.g. /dev/sda)" DISK &&
+echo "Where to install? (e.g. /dev/sda)" &&
+read -p DISK &&
 read -p "THIS WILL WIPE THE DISK $DISK [Press any key to continue]" &&
 ## Disk wiping
 wipefs --all ${DISK} &&
 ## Disk partitioning
-echo "label: dos
+echo "label: gpt
 device: ${DISK}
 unit: sectors
 
@@ -49,4 +50,4 @@ cat /mnt/etc/fstab
 # Copy files to new system
 cp * /mnt/root
 echo 'Scripts copied to new stystem'
-echo 'Please chroot into new system and execute next script (arch-chroot /mnt)'
+echo 'Please chroot into new system /root and execute next script (arch-chroot /mnt)'
