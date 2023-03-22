@@ -5,8 +5,6 @@ echo 'Make sure system is connected to the internet and keyboard layout is set'
 echo 'and execute INSIDE the archscripts folder'
 read -p '[Press any key to continue]'
 
-SCRIPTS_LOCATION=$(pwd)
-
 # --- Preinstall --- #
 # 1.6: Verify boot mode
 ls /sys/firmware/efi/efivars &&
@@ -18,7 +16,7 @@ read -p '[Press any key to continue]'
 # 1.9: Disk selection
 lsblk &&
 echo "Where to install? (e.g. /dev/sda)" &&
-read DISK &&
+read DISK
 read -p "THIS WILL WIPE THE DISK $DISK [Press any key to continue]" &&
 ## Disk wiping
 wipefs --all ${DISK} &&
@@ -44,10 +42,10 @@ swapon ${DISK}2
 cat packages_01 | pacstrap -K /mnt - &&
 # --- Config --- #
 # 3.1 Fstab
-genfstab -U /mnt >> /mnt/etc/fstab
-cat /mnt/etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstab &&
+cat /mnt/etc/fstab &&
 
 # Copy files to new system
-cp * /mnt/root
+cp * /mnt/root &&
 echo 'Scripts copied to new stystem'
 echo 'Please chroot into new system /root and execute next script (arch-chroot /mnt)'
