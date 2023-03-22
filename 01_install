@@ -35,11 +35,8 @@ lsblk -f
 read -p '[Press any key to continue]'
 # 1.11 Mounting
 mount ${DISK}3 /mnt &&
-read -p '[Press any key to continue]'
 mount --mkdir ${DISK}1 /mnt/boot &&
-read -p '[Press any key to continue]'
 swapon ${DISK}2
-read -p '[Press any key to continue]'
 # --- Install --- #
 # 2.1 Essential packages
 cat packages_01 | pacstrap -K /mnt - &&
@@ -48,7 +45,6 @@ read -p '[Press any key to continue]'
 # 3.1 Fstab
 genfstab -U /mnt >> /mnt/etc/fstab &&
 cat /mnt/etc/fstab &&
-read -p '[Press any key to continue]'
 
 # Copy files to new system
 cp * /mnt/root &&
