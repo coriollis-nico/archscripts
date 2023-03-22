@@ -8,13 +8,10 @@ read -p '[Press any key to continue]'
 # --- Preinstall --- #
 # 1.6: Verify boot mode
 ls /sys/firmware/efi/efivars &&
-read -p '[Press any key to continue]'
 # 1.7: Verify connection
-ping -c 2 archlinux.org &&
-read -p '[Press any key to continue]'
+ping -c 3 archlinux.org &&
 # 1.8: Update the system clock
 timedatectl &&
-read -p '[Press any key to continue]'
 # 1.9: Disk selection
 lsblk &&
 echo "Where to install? (e.g. /dev/sda)" &&
@@ -22,25 +19,13 @@ read DISK
 read -p "THIS WILL WIPE THE DISK $DISK [Press any key to continue]" &&
 ## Disk wiping
 wipefs --all ${DISK} &&
-read -p '[Press any key to continue]'
 ## Disk partitioning
-echo "label: gpt
-device: /dev/sdY
-unit: sectors
-
-1: size=2048,type=21686148-6449-6E6F-744E-656564454649,name=part-bios
-2: size=512MiB,type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B,name=part-efi
-3: size=512MiB,type=0FC63DAF-8483-4772-8E79-3D69D8477DE4,name=part-boot
-4: size=852GiB,type=E6D6D379-F507-44C2-A23C-238F2A3DF928,name=part-lvm
-5: type=0FC63DAF-8483-4772-8E79-3D69D8477DE4,name=part-extra
-" | sfdisk ${DISK} >> log &&
-read -p '[Press any key to continue]'
-# 1.10 Formatting
-mkfs.fat -F 32 -n BOOTP ${DISK}1 &&
-read -p '[Press any key to continue]'
-mkswap -L SWAPP ${DISK}2 &&
-read -p '[Press any key to continue]'
-mkfs.ext4 -L ROOTP ${DISK}3 &&
+parted --script $DISK \
+	mklabel gpt \
+	mkpart primary fat32 "BOOTP" 1MiB 2048MiB \
+	mkpart primary linux-swap "SWAPP" 2048MiB 4048MiB \
+	mkpart primary ext4 "ROOTP" 4048MiB 100%
+lsblk -f
 read -p '[Press any key to continue]'
 # 1.11 Mounting
 mount ${DISK}3 /mnt &&
