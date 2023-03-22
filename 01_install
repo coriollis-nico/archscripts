@@ -8,8 +8,10 @@ read -p '[Press any key to continue]'
 # --- Preinstall --- #
 # 1.6: Verify boot mode
 ls /sys/firmware/efi/efivars &&
+read -p '[Press any key to continue]'
 # 1.7: Verify connection
 ping -c 2 archlinux.org &&
+read -p '[Press any key to continue]'
 # 1.8: Update the system clock
 timedatectl &&
 read -p '[Press any key to continue]'
@@ -19,7 +21,8 @@ echo "Where to install? (e.g. /dev/sda)" &&
 read DISK
 read -p "THIS WILL WIPE THE DISK $DISK [Press any key to continue]" &&
 ## Disk wiping
-wipefs --all ${DISK} > log &&
+wipefs --all ${DISK} &&
+read -p '[Press any key to continue]'
 ## Disk partitioning
 echo "label: gpt
 device: ${DISK}
@@ -29,21 +32,30 @@ ${DISK}1 : size=2048MiB, type=UEFI
 ${DISK}2 : size=2GiB, type=SWAP
 ${DISK}3 : type=23
 " | sfdisk ${DISK} >> log &&
+read -p '[Press any key to continue]'
 # 1.10 Formatting
-mkfs.fat -F 32 -n BOOTP ${DISK}1 >> log &&
-mkswap -L SWAPP ${DISK}2 >> log &&
-mkfs.ext4 -L ROOTP ${DISK}3 >> log &&
+mkfs.fat -F 32 -n BOOTP ${DISK}1 &&
+read -p '[Press any key to continue]'
+mkswap -L SWAPP ${DISK}2 &&
+read -p '[Press any key to continue]'
+mkfs.ext4 -L ROOTP ${DISK}3 &&
+read -p '[Press any key to continue]'
 # 1.11 Mounting
 mount ${DISK}3 /mnt &&
+read -p '[Press any key to continue]'
 mount --mkdir ${DISK}1 /mnt/boot &&
+read -p '[Press any key to continue]'
 swapon ${DISK}2
+read -p '[Press any key to continue]'
 # --- Install --- #
 # 2.1 Essential packages
 cat packages_01 | pacstrap -K /mnt - &&
+read -p '[Press any key to continue]'
 # --- Config --- #
 # 3.1 Fstab
 genfstab -U /mnt >> /mnt/etc/fstab &&
 cat /mnt/etc/fstab &&
+read -p '[Press any key to continue]'
 
 # Copy files to new system
 cp * /mnt/root &&
