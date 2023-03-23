@@ -3,6 +3,7 @@ reflector
 thermald
 power-profiles-daemon
 python
-python-{matplotlib,numpy}
+python-matplotlib
+python-numpy
 gcc-fortran
 rustup
