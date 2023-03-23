@@ -3,8 +3,10 @@ pkgstats
 reflector
 thermald
 power-profiles-daemon
+tectonic
 python
 python-matplotlib
 python-numpy
 gcc-fortran
 rustup
+neofetch

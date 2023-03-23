@@ -26,6 +26,9 @@ passwd $USERNAME_INPUT
 gpasswd -a $USERNAME_INPUT wheel
 chown -R $USERNAME_INPUT /home/$USERNAME_INPUT
 
+read -p '[Press any key to edit sudoers]'
+EDITOR=rvim visudo
+
 echo "Package download..."
 # Install my packages
 cat packages_02 | pacman -Syu --needed --noconfirm -
