@@ -9,6 +9,7 @@ gst-plugins-good
 gst-plugins-ugly
 gnome-software-packagekit-plugin
 tumbler
+libreoffice-still
 unoconv
 grilo-plugins
 gnome-connections
@@ -16,4 +17,5 @@ gnome-multi-writer
 gnome-nettool
 gnome-sound-recorder
 gnome-tweaks
+alacarte
 
