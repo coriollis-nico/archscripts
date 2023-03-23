@@ -1,0 +1,52 @@
+#!/bin/bash
+echo 'NCH Arch Installer (post-reboot config.)'
+read -p '[Press any key to continue]'
+
+# finish network config
+echo "Network config..."
+systemctl enable NetworkManager.service
+systemctl start NetworkManager.service
+
+echo "bootctl config..."
+# Set up systemdboot autoupdates
+systemctl enable NetworkManager.service
+systemd-boot-update.service
+
+echo "Pacman config..."
+# Pacman config
+cp /etc/pacman.conf /etc/pacman.conf.backup
+cat pacman.conf > /etc/pacman.conf
+
+echo "User config"
+# Create user
+read -p "Username: " USERNAME_INPUT
+read -p "Real name: " NAME_INPUT
+useradd -m -c "$NAME_INPUT" $USERNAME_INPUT
+passwd $USERNAME_INPUT
+gpasswd -a $USERNAME_INPUT wheel
+chown -R $USERNAME_INPUT /home/$USERNAME_INPUT
+
+echo "Package download..."
+# Install my packages
+cat packages_02 | pacman -Syu --needed --noconfirm -
+
+echo "Reflector config..."
+# Reflector
+systemctl enable reflector.service
+
+echo "Energy config..."
+# ThermalD & powerprofilesdaemon
+systemctl start {thermald,power-profiles-daemon}.service
+systemctl enable {thermald,power-profiles-daemon}.service
+
+echo "makepkg config..."
+# makepkg
+cp /etc/makepkg.conf /etc/makepkg.conf.backup
+cat makepkg.conf > /etc/makepkg.conf
+echo "Remember to set up number of threads in makepkg.conf"
+
+echo "Rust config..."
+# Set up Rust
+rustup default stable
+
+echo "Congratulations. You have a minimall Arch Installation!"

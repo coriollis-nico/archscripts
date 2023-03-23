@@ -1,0 +1,8 @@
+pkgstats
+reflector
+thermald
+power-profiles-daemon
+python
+python-{matplotlib,numpy}
+gcc-fortran
+rustup
