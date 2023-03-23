@@ -9,8 +9,7 @@ systemctl start NetworkManager.service
 
 echo "bootctl config..."
 # Set up systemdboot autoupdates
-systemctl enable NetworkManager.service
-systemd-boot-update.service
+systemctl enable systemd-boot-update.service
 
 echo "Pacman config..."
 # Pacman config
