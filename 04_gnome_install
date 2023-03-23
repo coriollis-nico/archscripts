@@ -7,20 +7,20 @@ read -p "[Any key to continue]"
 cat pipewire_packages | sudo pacman -Syu --needed --noconfirm -
 
 # Fonts
-cat fontlist | sudo pacman -Syu --needed --noconfirm -
+cat fontlist | sudo pacman -S --needed --noconfirm -
 
 # GNOME
-cat gnome_packages | sudo pacman -Syu --needed --noconfirm -
+cat gnome_packages | sudo pacman -S --needed --noconfirm -
 
 # UI Packs
 # GNOME
-cat ui_packages | sudo pacman -Syu --needed --noconfirm -
+cat ui_packages | sudo pacman -S --needed --noconfirm -
 
 # GDM
 sudo systemctl enable gdm.service
 
 # Wayland for Firefox
-echo bashprofile_complements >> ~/.bash_profile
+cat bashprofile_complements >> ~/.bash_profile
 
 # End & reboot
 sudo systemctl reboot
