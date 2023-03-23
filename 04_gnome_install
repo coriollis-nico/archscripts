@@ -4,13 +4,13 @@ For security, dont run as root."
 read -p "[Any key to continue]"
 
 # Pipewire
-cat pipewire_packages | sudo pacman -Syu --needed --noconfirm -
+cat pipewire_packs | sudo pacman -Syu --needed --noconfirm -
 
 # Fonts
 cat fontlist | sudo pacman -S --needed --noconfirm -
 
 # GNOME
-cat gnome_packages | sudo pacman -S --needed --noconfirm -
+cat gnome_packs | sudo pacman -S --needed --noconfirm -
 
 # UI Packs
 # GNOME

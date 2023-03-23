@@ -23,6 +23,11 @@ read -p "Real name: " NAME_INPUT
 useradd -m -c "$NAME_INPUT" $USERNAME_INPUT
 passwd $USERNAME_INPUT
 gpasswd -a $USERNAME_INPUT wheel
+
+# Move scripts to user dir
+mkdir /home/${USERNAME_INPUT}/.build
+cp -r * /home/${USERNAME_INPUT}/.build
+
 chown -R $USERNAME_INPUT /home/$USERNAME_INPUT
 
 read -p '[Press any key to edit sudoers]'
