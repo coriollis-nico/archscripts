@@ -1,26 +1,34 @@
 #!/bin/bash
 echo "GNOME installer.
-For security, dont run as root."
+DONT run as root."
 read -p "[Any key to continue]"
 
+echo "Installing pipewire packages"
 # Pipewire
-cat pipewire_packs | sudo pacman -Syu --needed --noconfirm -
+cat desktop/pipewire_packs | sudo pacman -Syu --needed --noconfirm -
 
-# Fonts
-cat fontlist | sudo pacman -S --needed --noconfirm -
-
+echo "Installing GNOME packages"
 # GNOME
-cat gnome_packs | sudo pacman -S --needed --noconfirm -
+cat /desktop/gnome/gnome_packs | sudo pacman -S --needed --noconfirm -
 
+echo "Installing user packages"
 # UI Packs
 # GNOME
-cat ui_packages | sudo pacman -S --needed --noconfirm -
+cat desktop/ui_packages | sudo pacman -S --needed --noconfirm -
 
+echo "Enabling GDM"
 # GDM
 sudo systemctl enable gdm.service
 
+echo "Enabling Firefox Wayland"
 # Wayland for Firefox
-cat bashprofile_complements >> ~/.bash_profile
+cat desktop/bashprofile_complements >> ~/.bash_profile
+
+echo "Installing additional fonts"
+# Fonts
+cat desktop/fontlist | sudo pacman -S --needed --noconfirm -
+
+read -p "[Any key to reboot and finalize]"
 
 # End & reboot
 sudo systemctl reboot

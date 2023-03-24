@@ -8,34 +8,37 @@ systemctl enable NetworkManager.service
 systemctl start NetworkManager.service
 
 echo "bootctl config..."
+echo "MAKE SURE SECUREBOOT IS OFF"
 # Set up systemdboot autoupdates
 systemctl enable systemd-boot-update.service
 
-echo "Pacman config..."
+echo "Copying pacman config..."
 # Pacman config
 cp /etc/pacman.conf /etc/pacman.conf.backup
-cat pacman.conf > /etc/pacman.conf
+cat install_resources/pacman.conf > /etc/pacman.conf
 
 echo "User config"
 # Create user
-read -p "Username: " USERNAME_INPUT
 read -p "Real name: " NAME_INPUT
+read -p "Username: " USERNAME_INPUT
 useradd -m -c "$NAME_INPUT" $USERNAME_INPUT
 passwd $USERNAME_INPUT
 gpasswd -a $USERNAME_INPUT wheel
+echo "User added to wheel group"
 
+echo "Copying scripts to user home folder"
 # Move scripts to user dir
-mkdir /home/${USERNAME_INPUT}/.build
-cp -r * /home/${USERNAME_INPUT}/.build
+mkdir /home/${USERNAME_INPUT}/.archscripts
+cp -r * /home/${USERNAME_INPUT}/.archscripts
 
 chown -R $USERNAME_INPUT /home/$USERNAME_INPUT
 
 read -p '[Press any key to edit sudoers]'
 EDITOR=rvim visudo
 
-echo "Package download..."
+echo "Packages download..."
 # Install my packages
-cat packages_02 | pacman -Syu --needed --noconfirm -
+cat install_resources/packages_02 | pacman -Syu --needed --noconfirm -
 
 echo "Reflector config..."
 # Reflector
@@ -43,17 +46,22 @@ systemctl enable reflector.service
 
 echo "Energy config..."
 # ThermalD & powerprofilesdaemon
-systemctl start {thermald,power-profiles-daemon}.service
-systemctl enable {thermald,power-profiles-daemon}.service
+echo "Setting up thermald"
+systemctl start thermald.service
+systemctl enable thermald.service
+echo "Setting up power-profiles-daemon"
+systemctl start power-profiles-daemon.service
+systemctl enable power-profiles-daemon.service
 
-echo "makepkg config..."
+echo "Setting up makepkg.conf to enable optimized binaries"
 # makepkg
 cp /etc/makepkg.conf /etc/makepkg.conf.backup
-cat makepkg.conf > /etc/makepkg.conf
+cat install_resources/makepkg.conf > /etc/makepkg.conf
 echo "Remember to set up number of threads in makepkg.conf"
 
 echo "Rust config..."
 # Set up Rust
 rustup default stable
 
-echo "Congratulations. You have a minimall Arch Installation!"
+echo "Congratulations. You have a minimal Arch Installation!"
+

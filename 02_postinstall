@@ -16,27 +16,29 @@ echo es_MX.UTF-8 UTF-8 >> /etc/locale.gen
 ## Generate locales
 locale-gen
 ## LANG (MX spanish)
+echo "Setting lang: es_MX.UTF-8"
 echo LANG=es_MX.UTF-8 > /etc/locale.conf
 ## Keyboard Layout
+echo "Setting tty key layout: la-latin1"
 echo KEYMAP=la-latin1 > /etc/vconsole.conf
 # 3.5: Network
 echo "Network config..."
-echo "Enter hostname: "
-read HOSTNAME_INPUT
+read -p "Enter system hostname: " HOSTNAME_INPUT
 echo $HOSTNAME_INPUT > /etc/hostname
 # 3.7: Root password
-echo "Root password"
+echo "Set root password: "
 passwd
 # 3.8: Bootloader
 echo "Bootloader config..."
 bootctl install
 ##
+echo "Setting up zen kernel:"
 echo "default arch-zen.conf
 timeout 1
 console-mode max
 editor no" > /boot/loader/loader.conf
 ##
-cp arch-zen.conf /boot/loader/entries
-cp arch-zen-fallback.conf /boot/loader/entries
+cp zen_kernel/arch-zen.conf /boot/loader/entries
+cp zen_kernel/arch-zen-fallback.conf /boot/loader/entries
 
 echo "Exit, unmount & reboot. Then execute next script"
