@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 echo "GNOME installer.
 DONT run as root."
 read -p "[Any key to continue]"

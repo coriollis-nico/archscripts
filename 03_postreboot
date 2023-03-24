@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 echo 'NCH Arch Installer (post-reboot config.)'
 read -p '[Press any key to continue]'
 

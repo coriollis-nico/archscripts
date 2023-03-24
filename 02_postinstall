@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 echo 'NCH Arch Installer (post-install config.)'
 read -p '[Press any key to continue]'
 # 3.3: Timezone

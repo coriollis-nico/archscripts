@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 echo 'NCH Arch Installer'
 echo 'THIS WILL WIPE AN ENTIRE PHYSICAL DISK'
 echo 'Make sure system is connected to the internet and keyboard layout is set'
