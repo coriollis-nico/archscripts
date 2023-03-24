@@ -16,22 +16,22 @@ cat install_resources/pacman.conf > /etc/pacman.conf
 # --- Preinstall --- #
 # 1.6: Verify boot mode
 echo "Verifying boot mode (EFI)"
-ls /sys/firmware/efi/efivars &&
+ls /sys/firmware/efi/efivars
 # 1.7: Verify connection
 echo "Verifying internet connection"
-ping -c 3 archlinux.org &&
+ping -c 3 archlinux.org
 # 1.8: Update the system clock
 echo "Updating system clock"
-timedatectl &&
+timedatectl
 # 1.9: Disk selection
 echo "Showing detected disks"
-lsblk &&
-echo "Where to install? (e.g. /dev/sda)" &&
+lsblk
+echo "Where to install? (e.g. /dev/sda)"
 read DISK
-read -p "THIS WILL WIPE THE DISK $DISK [Press any key to continue]" &&
+read -p "THIS WILL WIPE THE DISK $DISK [Press any key to continue]"
 ## Disk wiping
 echo "Wiping disk file system"
-wipefs --all ${DISK} &&
+wipefs --all ${DISK}
 ## Disk partitioning
 echo "Partitioning disk"
 parted --script -a optimal $DISK \
@@ -49,21 +49,21 @@ mkfs.ext4 -L ROOTP ${DISK}3
 lsblk -f
 # 1.11 Mounting
 echo "Mounting disks"
-mount ${DISK}3 /mnt &&
-mount --mkdir ${DISK}1 /mnt/boot &&
+mount ${DISK}3 /mnt
+mount --mkdir ${DISK}1 /mnt/boot
 swapon ${DISK}2
 # --- Install --- #
 # 2.1 Essential packages
 echo "Installing essential packages"
-cat install_resources/packages_01 | pacstrap -K /mnt - &&
+cat install_resources/packages_01 | pacstrap -K /mnt -
 read -p '[Press any key to continue]'
 # --- Config --- #
 # 3.1 Fstab
 echo "Generating fstab"
-genfstab -U /mnt >> /mnt/etc/fstab &&
-cat /mnt/etc/fstab &&
+genfstab -U /mnt >> /mnt/etc/fstab
+cat /mnt/etc/fstab
 
 # Copy files to new system
-cp -r * /mnt/root &&
+cp -r * /mnt/root
 echo 'Scripts copied to new stystem'
 echo 'Please chroot into new system (arch-chroot /mnt), cd to /root and execute next script'
