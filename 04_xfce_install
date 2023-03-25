@@ -11,7 +11,7 @@ cat desktop/pipewire_packs | sudo pacman -Syu --needed --noconfirm -
 
 # Xorg
 echo "Installing Xorg"
-sudo pacman -S --needed --noconfirm xorg xorg-{server,apps}
+sudo pacman -S --needed --noconfirm xorg xorg-server xorg-apps
 ## Keyboard conf
 echo "Changing keyboard layout"
 sudo cp install_resources/00-keyboard.conf /etc/X11/xorg.conf.d/
@@ -27,6 +27,10 @@ cat desktop/ui_packages | sudo pacman -S --needed --noconfirm -
 # Session manager
 echo "Enabling LightDM"
 sudo systemctl enable lightdm.service
+
+# Enable CUPS
+echo "Enabling CUPS"
+sudo systemctl enable cups.socket
 
 # Fonts
 echo "Installing additional fonts"
