@@ -1,0 +1,14 @@
+xfce4
+xfce4-goodies
+gvfs
+thunar-archive-plugin
+thunar-volman
+tumbler
+thunar-media-tags-plugin
+ffmpegthumbnailer
+lightdm
+lightdm-gtk-greeter
+lightdm-gtk-greeter-settings
+nm-connection-editor
+network-manager-applet
+
