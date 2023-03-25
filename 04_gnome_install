@@ -18,8 +18,9 @@ sudo cp install_resources/00-keyboard.conf /etc/X11/xorg.conf.d/
 
 echo "Installing GNOME packages"
 # GNOME
-read -p "You will be asked if you wish to install epiphany (GNOME default browser)"
-cat desktop/gnome/gnome_packs | sudo pacman -S --needed --noconfirm --ignore epiphany -
+echo "You will be asked if you wish to install epiphany (GNOME default browser)"
+read -p "[Any key to continue]"
+cat desktop/gnome/gnome_packs | sudo pacman -S --needed --ignore epiphany -
 
 echo "Installing user packages"
 # UI Packs
