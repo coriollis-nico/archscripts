@@ -36,6 +36,9 @@ sudo systemctl enable cups.socket
 echo "Installing additional fonts"
 cat desktop/fontlist | sudo pacman -S --needed --noconfirm -
 
+echo "Creating user directories"
+xdg-user-dirs-update
+
 read -p "[Any key to reboot and finalize]"
 
 # End & reboot
