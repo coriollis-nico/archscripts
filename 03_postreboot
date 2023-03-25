@@ -46,6 +46,9 @@ echo "Reflector config..."
 # Reflector
 systemctl enable reflector.service
 
+echo "Activate firewalld..."
+systemctl enable firewalld.service
+
 echo "Energy config..."
 # ThermalD & powerprofilesdaemon
 echo "Setting up thermald"
