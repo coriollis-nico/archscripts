@@ -11,7 +11,7 @@ cat desktop/pipewire_packs | sudo pacman -Syu --needed --noconfirm -
 
 echo "Installing GNOME packages"
 # GNOME
-cat /desktop/gnome/gnome_packs | sudo pacman -S --needed --noconfirm -
+cat desktop/gnome/gnome_packs | sudo pacman -S --needed --noconfirm -
 
 echo "Installing user packages"
 # UI Packs
