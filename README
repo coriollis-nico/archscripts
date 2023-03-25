@@ -13,3 +13,4 @@ They will not
 -allow dual booting (at least not using the same physical disk)
 -encrypt storage or swap space
 -configure sudoers.conf automatically
+-set up nvidia or amd gpu drivers
