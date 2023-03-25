@@ -56,7 +56,7 @@ swapon ${DISK}2
 # 2.1 Essential packages
 echo "Installing essential packages"
 cat install_resources/packages_01 | pacstrap -K /mnt -
-read -p '[Press any key to continue]'
+
 # --- Config --- #
 # 3.1 Fstab
 echo "Generating fstab"
