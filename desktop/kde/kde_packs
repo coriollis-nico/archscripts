@@ -30,7 +30,19 @@ krdc
 krfb
 ktorrent
 telepathy-kde-meta
-kde-pim-meta
+akonadi-calendar-tools
+akonadiconsole
+akregator
+kaddressbook
+kalarm
+kalendar
+kdepim-addons
+kleopatra
+kmail
+knotes
+kontact
+korganizer
+zanshin
 dolphin-plugins
 kde-system-meta
 kde-utilities-meta
@@ -43,4 +55,7 @@ flatpak
 packagekit-qt5
 libreoffice-still
 encfs
+sonnet
+hunspell
+hunspell-es_mx
 

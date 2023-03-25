@@ -1,4 +1,6 @@
 gnome
+gedit
+gedit-plugins
 eog-plugins
 lrzip
 p7zip
@@ -17,5 +19,7 @@ gnome-multi-writer
 gnome-nettool
 gnome-sound-recorder
 gnome-tweaks
+hunspell
+hunspell-es_mx
 flatpak
 
