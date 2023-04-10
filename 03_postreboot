@@ -62,9 +62,5 @@ cp /etc/makepkg.conf /etc/makepkg.conf.backup
 cat install_resources/makepkg.conf > /etc/makepkg.conf
 echo "Remember to set up number of threads in makepkg.conf"
 
-echo "Rust config..."
-# Set up Rust
-rustup default stable
-
 echo "Congratulations. You have a minimal Arch Installation!"
 

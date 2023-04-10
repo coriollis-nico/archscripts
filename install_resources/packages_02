@@ -8,7 +8,7 @@ python
 python-matplotlib
 python-numpy
 gcc-fortran
-rustup
+rust
 neofetch
 archlinux-wallpaper
 firewalld
