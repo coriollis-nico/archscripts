@@ -21,6 +21,8 @@ phonon-qt5-vlc
 kdeconnect
 kdenetwork-filesharing
 kget
+libktorrent
+libmms
 kio-extras
 kio-gdrive
 kio-zeroconf
