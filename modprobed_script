@@ -1,0 +1,35 @@
+#!/bin/bash
+set -e
+
+echo "modprobed-db auto install"
+echo "DONT RUN AS ROOT"
+echo "Run on archscripts directory"
+read -p "[Any key to continue]"
+
+SCRIPTS_DIR=$PWD
+
+echo "Getting modprobed-db from AUR"
+
+cd ~/Descargas
+mkdir -p aur
+cd aur
+
+echo "Now in $PWD"
+
+git clone https://aur.archlinux.org/modprobed-db.git
+cd modprobed-db
+makepkg -sirc --noconfirm
+
+cd $SCRIPTS_DIR
+echo "Now in $PWD"
+
+echo "Copying recommended modules"
+cp modprobed.db ~/.config/modprobed.db
+echo "First run"
+modprobed-db
+modprobed-db store
+echo "Activating timers"
+systemctl --user enable modprobed-db.service
+systemctl --user start modprobed-db.service
+
+echo "Done"
