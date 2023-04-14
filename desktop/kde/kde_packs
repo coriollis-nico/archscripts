@@ -20,9 +20,6 @@ kmix
 phonon-qt5-vlc
 kdeconnect
 kdenetwork-filesharing
-kget
-libktorrent
-libmms
 kio-extras
 kio-gdrive
 kio-zeroconf
@@ -30,7 +27,6 @@ konversation
 kopete
 krdc
 krfb
-ktorrent
 telepathy-kde-meta
 akonadi-calendar-tools
 akonadiconsole
