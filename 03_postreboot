@@ -62,5 +62,8 @@ cp /etc/makepkg.conf /etc/makepkg.conf.backup
 cat install_resources/makepkg.conf > /etc/makepkg.conf
 echo "Remember to set up number of threads in makepkg.conf"
 
-echo "Congratulations. You have a minimal Arch Installation!"
+echo "Disabling hibernation"
+mkdir /etc/systemd/sleep.conf.d
+cp install_resources/00-disable-hibernation.conf /etc/systemd/sleep.conf.d/00-disable-hibernation.conf
 
+echo "Congratulations. You have a minimal Arch Installation!"
