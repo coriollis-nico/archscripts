@@ -10,7 +10,7 @@ In its current form, these scripts
 -set up a 2GiB boot partition (i like kernels)
 -set up a 2GiB swap space
 -install pipewire
--activate bootctl auto-upodate (i.e. require disabling SecureBoot)
+-activate bootctl auto-update (i.e. require disabling SecureBoot)
 -disabe hibernation
 -activate modprobed-db
 
