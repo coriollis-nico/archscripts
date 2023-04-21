@@ -1,12 +1,11 @@
 Scripts I'm writing to set up Arch on my machines faster, following the wiki.
 
 In its current form, these scripts
--instal zen-kernel
+-install zen-kernel
 -install pkgstats
 -activate reflector with default settings
 -will install in spanish (MX) and a latin-america kb layout
 -asume an Intel processor
---install amber-mesa
 -set up a 2GiB boot partition (i like kernels)
 -set up a 2GiB swap space
 -install pipewire
