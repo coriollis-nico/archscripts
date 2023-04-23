@@ -5,10 +5,7 @@ thermald
 power-profiles-daemon
 tectonic
 python
-python-numpy
 gcc-fortran
 rust
 neofetch
-archlinux-wallpaper
 firewalld
-
