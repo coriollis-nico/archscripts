@@ -2,10 +2,7 @@ git
 pkgstats
 reflector
 thermald
-power-profiles-daemon
-tectonic
 python
 gcc-fortran
 rust
 neofetch
-firewalld
