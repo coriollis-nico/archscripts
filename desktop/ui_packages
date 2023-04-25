@@ -1,5 +1,6 @@
 firewalld
 tectonic
+gcc-fortran
 power-profiles-daemon
 firefox
 bitwarden

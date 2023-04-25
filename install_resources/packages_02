@@ -3,6 +3,5 @@ pkgstats
 reflector
 thermald
 python
-gcc-fortran
 rust
 neofetch
