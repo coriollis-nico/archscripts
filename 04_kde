@@ -27,6 +27,9 @@ cat desktop/ui_packages | sudo pacman -S --needed --noconfirm -
 echo "Enabling firewalld"
 sudo systemctl enable firewalld.service
 
+echo "Setting up power-profiles-daemon"
+sudo systemctl enable power-profiles-daemon.service
+
 # Session manager
 echo "Enabling SDDM"
 sudo systemctl enable sddm.service

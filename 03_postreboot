@@ -50,8 +50,6 @@ echo "Energy config..."
 # ThermalD & powerprofilesdaemon
 echo "Setting up thermald"
 systemctl enable thermald.service
-echo "Setting up power-profiles-daemon"
-systemctl enable power-profiles-daemon.service
 
 echo "Setting up makepkg.conf to enable optimized binaries"
 # makepkg
