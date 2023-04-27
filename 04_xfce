@@ -24,6 +24,9 @@ echo "Installing user packages"
 # UI Packs
 cat desktop/ui_packages | sudo pacman -S --needed --noconfirm -
 
+echo "Enabling firewalld"
+sudo systemctl enable firewalld.service
+
 # Session manager
 echo "Enabling LightDM"
 sudo systemctl enable lightdm.service
