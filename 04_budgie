@@ -1,0 +1,43 @@
+#!/bin/bash
+set -e
+
+echo "GNOME installer.
+DONT run as root."
+read -p "[Any key to continue]"
+
+echo "Installing pipewire packages"
+# Pipewire
+cat desktop/pipewire_packs | sudo pacman -Syu --needed --noconfirm -
+
+# Xorg
+echo "Installing Xorg"
+sudo pacman -S --needed --noconfirm xorg xorg-server xorg-apps
+## Keyboard conf
+echo "Changing keyboard layout"
+sudo cp install_resources/00-keyboard.conf /etc/X11/xorg.conf.d/
+
+echo "Installing Budgie packages"
+cat desktop/budgie/budgie_packs | sudo pacman -S --needed -
+
+echo "Installing user packages"
+# UI Packs
+cat desktop/ui_packages | sudo pacman -S --needed --noconfirm -
+
+echo "Enabling firewalld"
+sudo systemctl enable firewalld.service
+
+echo "Setting up power-profiles-daemon"
+sudo systemctl enable power-profiles-daemon.service
+
+echo "Enabling LightDM"
+# GDM
+sudo systemctl enable lightdm.service
+
+echo "Installing additional fonts"
+# Fonts
+cat desktop/fontlist | sudo pacman -S --needed --noconfirm -
+
+read -p "[Any key to reboot and finalize]"
+
+# End & reboot
+sudo systemctl reboot
