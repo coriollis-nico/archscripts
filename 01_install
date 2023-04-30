@@ -64,8 +64,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 cat /mnt/etc/fstab
 
 # Copy files to new system
-mkdir -p /usr/share/backgrounds/archscripts
-mv wallpapers/* /usr/share/backgrounds/archscripts
+mkdir -p /mnt/usr/share/backgrounds/archscripts
+mv wallpapers/* /mnt/usr/share/backgrounds/archscripts
 rmdir wallpapers
 cp -r * /mnt/root
 echo 'Scripts copied to new stystem'
