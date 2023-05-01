@@ -54,16 +54,16 @@ echo "Testing encrypted partition"
 umount /mnt
 cryptsetup close root
 cryptsetup open ${DISK}2 root
-mount /dev/mapper/root /mnt
 
 # 1.10: Formatting
 echo "Formatting partitions"
 mkfs.fat -F 32 -n BOOTP ${DISK}1
-mkfs.ext4 -L ROOTP ${DISK}2
+mkfs.ext4 -L ROOTP /dev/mapper/root
 lsblk -f
 
 # 1.11 Mounting
 echo "Mounting ESP"
+mount /dev/mapper/root /mnt
 mount --mkdir ${DISK}1 /mnt/boot
 
 # --- Install --- #
