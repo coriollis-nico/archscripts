@@ -1,0 +1,89 @@
+#!/bin/bash
+set -e
+
+echo 'NCH Arch Installer'
+echo '(encrypted ver. & no swap)'
+echo 'THIS WILL WIPE AN ENTIRE PHYSICAL DISK'
+echo 'Make sure system is connected to the internet and keyboard layout is set'
+echo 'and execute INSIDE the archscripts folder'
+read -p '[Press any key to continue]'
+
+# edit live pacman.conf
+echo "Pacman config..."
+# Pacman config
+cp /etc/pacman.conf /etc/pacman.conf.backup
+cat install_resources/pacman.conf > /etc/pacman.conf
+
+# --- Preinstall --- #
+# 1.6: Verify boot mode
+echo "Verifying boot mode (EFI)"
+ls /sys/firmware/efi/efivars
+# 1.7: Verify connection
+echo "Verifying internet connection"
+ping -c 3 archlinux.org
+# 1.8: Update the system clock
+echo "Updating system clock"
+timedatectl
+# 1.9: Disk selection
+echo "Showing detected disks"
+lsblk
+echo "Where to install? (e.g. /dev/sda)"
+read DISK
+read -p "THIS WILL WIPE THE DISK $DISK [Press any key to continue]"
+## Disk wiping
+echo "Wiping disk file system"
+wipefs --all ${DISK}
+
+## Disk partitioning
+echo "Partitioning disk"
+parted --script -a optimal $DISK \
+	mklabel gpt \
+	mkpart primary 1MiB 2048MiB \
+	set 1 esp on \
+	mkpart primary 2048MiB 100%
+
+## encrypted partiton
+echo "Creating encrypted partition"
+cryptsetup -y -v luksFormat ${DISK}2
+cryptsetup open ${DISK}2 root
+mkfs.ext4 /dev/mapper/root
+mount /dev/mapper/root /mnt
+
+# testing encryption
+echo "Testing encrypted partition"
+umount /mnt
+cryptsetup close root
+cryptsetup open ${DISK}2 root
+mount /dev/mapper/root /mnt
+
+# 1.10: Formatting
+echo "Formatting partitions"
+mkfs.fat -F 32 -n BOOTP ${DISK}1
+mkfs.ext4 -L ROOTP ${DISK}2
+lsblk -f
+
+# 1.11 Mounting
+echo "Mounting ESP"
+mount --mkdir ${DISK}1 /mnt/boot
+
+# --- Install --- #
+# 2.1 Essential packages
+echo "Installing essential packages"
+cat install_resources/packages_01 | pacstrap -K /mnt -
+
+# --- Config --- #
+# 3.1 Fstab
+echo "Generating fstab"
+genfstab -U /mnt >> /mnt/etc/fstab
+cat /mnt/etc/fstab
+# Extra: mkinitcpio
+echo "Setting up mkinitcpio.conf on target system"
+cat encrypt_resources/mkinitcpio.conf > /mnt/etc/mkinitcpio.conf
+
+# Copy files to new system
+mkdir -p /mnt/usr/share/backgrounds/archscripts
+mv wallpapers/* /mnt/usr/share/backgrounds/archscripts
+rmdir wallpapers
+cp -r * /mnt/root
+echo 'Scripts copied to new stystem'
+echo 'Please chroot into new system (arch-chroot /mnt), cd to /root and execute next script (02_encrypt)'
