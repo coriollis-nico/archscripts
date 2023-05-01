@@ -48,9 +48,9 @@ editor no" > /boot/loader/loader.conf
 ROOT_UUID=$(cat encrypt_resources/root_UUID)
 
 cp encrypt_resources/arch-zen.conf /boot/loader/entries/
-echo "cryptdevice=UUID=${ROOT_UUID}:root root=/dev/mapper/root rw" >> /boot/loader/entries/arch-zen.conf
+echo "options cryptdevice=UUID=${ROOT_UUID}:root root=/dev/mapper/root rw" >> /boot/loader/entries/arch-zen.conf
 
 cp encrypt_resources/arch-zen-fallback.conf /boot/loader/entries/arch-zen-fallback.conf
-echo "cryptdevice=UUID=${ROOT_UUID}:root root=/dev/mapper/root rw" >> /boot/loader/entries/arch-zen-fallback.conf
+echo "options cryptdevice=UUID=${ROOT_UUID}:root root=/dev/mapper/root rw" >> /boot/loader/entries/arch-zen-fallback.conf
 
 echo "Exit, unmount & reboot. Then execute next script"
