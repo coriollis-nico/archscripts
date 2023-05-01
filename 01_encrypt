@@ -81,9 +81,6 @@ echo "Setting up mkinitcpio.conf on target system"
 cat encrypt_resources/mkinitcpio.conf > /mnt/etc/mkinitcpio.conf
 
 # Copy files to new system
-mkdir -p /mnt/usr/share/backgrounds/archscripts
-mv wallpapers/* /mnt/usr/share/backgrounds/archscripts
-rmdir wallpapers
 cp -r * /mnt/root
 echo 'Scripts copied to new stystem'
 echo 'Please chroot into new system (arch-chroot /mnt), cd to /root and execute next script (02_encrypt)'
