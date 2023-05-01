@@ -27,6 +27,10 @@ echo KEYMAP=la-latin1 > /etc/vconsole.conf
 echo "Network config..."
 read -p "Enter system hostname: " HOSTNAME_INPUT
 echo $HOSTNAME_INPUT > /etc/hostname
+
+#mkinitcpio
+mkinitcpio -P
+
 # 3.7: Root password
 echo "Set root password: "
 passwd
