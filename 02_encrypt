@@ -45,7 +45,7 @@ console-mode max
 editor no" > /boot/loader/loader.conf
 ##
 # Getting UUID
-ROOT_UUID=$(blkid -s UUID -o value $(df --output=source $(pwd) | tail -n 1))
+ROOT_UUID=$(cat encrypt_resources/root_UUID)
 
 cp encrypt_resources/arch-zen.conf /boot/loader/entries/
 echo "cryptdevice=UUID=${ROOT_UUID}:root root=/dev/mapper/root rw" >> /boot/loader/entries/arch-zen.conf

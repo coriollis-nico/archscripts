@@ -80,6 +80,8 @@ echo "Setting up mkinitcpio.conf on target system"
 cat encrypt_resources/mkinitcpio.conf > /mnt/etc/mkinitcpio.conf
 
 # Copy files to new system
+echo $(df --output=source -o value ${DISK}2) > encrypt_resources/root_UUID
 cp -r * /mnt/root
+
 echo 'Scripts copied to new stystem'
 echo 'Please chroot into new system (arch-chroot /mnt), cd to /root and execute next script (02_encrypt)'
