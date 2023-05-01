@@ -61,6 +61,9 @@ echo "Disabling hibernation"
 mkdir /etc/systemd/sleep.conf.d
 cp install_resources/00-disable-hibernation.conf /etc/systemd/sleep.conf.d/00-disable-hibernation.conf
 
+echo "Deleting files in root directory"
+rm -rf /root/*
+
 echo "Locking root user"
 passwd --lock root
 
