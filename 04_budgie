@@ -19,6 +19,10 @@ cat desktop/budgie/budgie_packs | sudo pacman -S --needed --noconfirm -
 echo "Installing user packages"
 cat desktop/ui_packages | sudo pacman -S --needed --noconfirm -
 
+echo "Creating user directories"
+sudo pacman -S --noconfirm --asdeps xdg-user-dirs
+xdg-user-dirs-update
+
 echo "Enabling firewalld"
 sudo systemctl enable firewalld.service
 
