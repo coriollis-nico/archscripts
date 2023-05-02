@@ -5,7 +5,7 @@ lightdm-gtk-greeter
 lightdm-gtk-greeter-settings
 arc-gtk-theme
 papirus-icon-theme
-gnome-console
+gnome-terminal
 nemo
 nemo-fileroller
 gnome-calculator
