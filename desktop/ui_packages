@@ -12,3 +12,7 @@ pandoc
 qbittorrent
 libreoffice-fresh
 archlinux-wallpaper
+texlive-most
+texlive-bibtexextra
+texlive-fontsextra
+biber

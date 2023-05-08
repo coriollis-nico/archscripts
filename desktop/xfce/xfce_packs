@@ -14,9 +14,8 @@ network-manager-applet
 cups
 cups-pdf
 system-config-printer
-libreoffice-still
 gspell
 hunspell
 hunspell-es_mx
 xdg-user-dirs
-
+gnome-latex
